@@ -28,7 +28,7 @@
             <option value="Other">Other</option>
         </select><br><br>
         <label for="passenger_list">Passenger List:</label><br>
-        <input type="text" name="passenger_1" placeholder="Passenger 1"><br> required><br><br>
+        <input type="text" name="passenger_1" placeholder="Passenger 1" required><br>
         <input type="text" name="passenger_2" placeholder="Passenger 2"><br>
         <input type="text" name="passenger_3" placeholder="Passenger 3"><br>
         <input type="text" name="passenger_4" placeholder="Passenger 4"><br>
@@ -61,7 +61,18 @@
     </form>
 
     <script type="text/javascript">
-function validateMileage() {
+        function validateForm(event) {
+            const form = document.getElementById("bookingForm");
+            if (!form.checkValidity()) {
+                event.preventDefault();  // Prevent form submission
+                alert("Please fill in all required fields.");
+                return false;
+            }
+
+            return validateMileage();  // Check mileage after form fields
+        }
+
+        function validateMileage() {
             const start = document.getElementById("mileage_start").value;
             const finish = document.getElementById("mileage_finish").value;
             if (finish && parseInt(finish) < parseInt(start)) {
@@ -72,7 +83,7 @@ function validateMileage() {
         }
 
         function sendEmail(event) {
-if (!validateMileage()) {
+            if (!validateForm(event)) {
                 return;
             }
             event.preventDefault();  // Prevent form submission
