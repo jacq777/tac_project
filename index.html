@@ -46,10 +46,16 @@
 <html>
 <head>
     <title>Minibus Booking</title>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_USER_ID");  // Replace with your EmailJS user ID
+        })();
+    </script>
 </head>
 <body>
     <h1>Minibus Booking System</h1>
-    <form action="submit_booking.html" method="get">
+    <form id="bookingForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="date">Date:</label>
@@ -76,8 +82,20 @@
         <textarea id="incidents" name="incidents" rows="4" cols="50"></textarea><br><br>
         <label for="damage_issues">Damage Issues:</label>
         <textarea id="damage_issues" name="damage_issues" rows="4" cols="50"></textarea><br><br>
-        <input type="submit" value="Book">
+        <input type="submit" value="Book" onclick="sendEmail(event)">
     </form>
+
+    <script type="text/javascript">
+        function sendEmail(event) {
+            event.preventDefault();  // Prevent form submission
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', '#bookingForm')
+                .then(function(response) {
+                    alert('Booking email sent successfully!');
+                }, function(error) {
+                    alert('Failed to send booking email: ' + JSON.stringify(error));
+                });
+        }
+    </script>
 </body>
 </html>
 
