@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Minibus Booking</title>
-<style>
+    <style>
         .required::after {
             content: " *";
             color: red;
         }
     </style>
-<script src="config.js"></script> <!-- Add this line to include config.js -->
+    <script src="config.js"></script> <!-- Include config.js -->
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
@@ -97,7 +97,7 @@
 
             // Concatenate passenger list inputs
             const passengerList = [];
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 17; i++) {
                 const passenger = document.querySelector(`[name="passenger_${i}"]`).value;
                 if (passenger) {
                     passengerList.push(passenger);
@@ -110,7 +110,7 @@
             passengerListField.setAttribute("value", passengerListString);
             document.getElementById("bookingForm").appendChild(passengerListField);
             
-            emailjs.sendForm(window.env.EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, '#bookingForm')
+            emailjs.sendForm(window.env.EMAILJS_SERVICE_ID, window.env.EMAILJS_TEMPLATE_ID, '#bookingForm')
                 .then(function(response) {
                     alert('Booking email sent successfully!');
                 }, function(error) {
