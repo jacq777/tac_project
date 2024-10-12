@@ -8,10 +8,11 @@
             color: red;
         }
     </style>
+<script src="config.js"></script> <!-- Add this line to include config.js -->
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("0szzn0D--PYhazodd");  // Replace with your Public Key
+            emailjs.init(window.env.EMAILJS_PUBLIC_KEY);  // Use variable from config.js
         })();
     </script>
 </head>
@@ -109,7 +110,7 @@
             passengerListField.setAttribute("value", passengerListString);
             document.getElementById("bookingForm").appendChild(passengerListField);
             
-            emailjs.sendForm('service_jbulmm8', 'template_awcvemj', '#bookingForm')
+            emailjs.sendForm(window.env.EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, '#bookingForm')
                 .then(function(response) {
                     alert('Booking email sent successfully!');
                 }, function(error) {

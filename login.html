@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Driver Login</title>
@@ -30,6 +30,44 @@
             } else {
                 document.getElementById("error-message").textContent = "Invalid login credentials.";
                 return false;; // Prevent form submission
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver Login</title>
+    <script src="config.js"></script> <!-- Add this line to include config.js -->
+</head>
+<body>
+    <h1>Driver Login</h1>
+    <form onsubmit="return validateLogin()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+    <p id="error-message" style="color:red;"></p>
+    <script>
+        function validateLogin() {
+            const validUsers = {
+                [window.env.DRIVER1_USERNAME]: window.env.DRIVER1_PASSWORD,
+                [window.env.DRIVER2_USERNAME]: window.env.DRIVER2_PASSWORD,
+                // Add other drivers as needed
+            };
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (validUsers[username] && validUsers[username] === password) {
+                sessionStorage.setItem("loggedIn", "true");
+                window.location.href = "index.html";
+                return false; // Prevent form submission
+            } else {
+                document.getElementById("error-message").textContent = "Invalid login credentials.";
+                return false; // Prevent form submission
             }
         }
     </script>
