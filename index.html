@@ -11,7 +11,7 @@
 </head>
 <body>
     <h1>Minibus Booking System</h1>
-    <form id="bookingForm">
+    <form id="bookingForm" onsubmit="return validateMileage()">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="date">Date:</label>
@@ -27,13 +27,17 @@
             <option value="XC">XC</option>
             <option value="Other">Other</option>
         </select><br><br>
-        <label for="passenger_list">Passenger List:</label>
-        <textarea id="passenger_list" name="passenger_list" rows="4" cols="50"></textarea><br><br>
+        <label for="passenger_list">Passenger List:</label><br>
+        <input type="text" name="passenger_1" placeholder="Passenger 1"><br>
+        <input type="text" name="passenger_2" placeholder="Passenger 2"><br>
+        <input type="text" name="passenger_3" placeholder="Passenger 3"><br>
+        <!-- Add more input fields as needed -->
+        <br>
         <label for="mileage_start">Mileage at Start:</label>
         <input type="number" id="mileage_start" name="mileage_start" required><br><br>
         <label for="mileage_finish">Mileage at Finish:</label>
         <input type="number" id="mileage_finish" name="mileage_finish"><br><br>
-        <label for="fuel_added">Fuel Added in L:</label>
+        <label for="fuel_added">Fuel Added in Litres:</label>
         <input type="number" id="fuel_added" name="fuel_added"><br><br>
         <label for="incidents">Incidents:</label>
         <textarea id="incidents" name="incidents" rows="4" cols="50"></textarea><br><br>
@@ -43,7 +47,20 @@
     </form>
 
     <script type="text/javascript">
+function validateMileage() {
+            const start = document.getElementById("mileage_start").value;
+            const finish = document.getElementById("mileage_finish").value;
+            if (finish && parseInt(finish) < parseInt(start)) {
+                alert("Mileage at Finish cannot be less than Mileage at Start.");
+                return false;  // Prevent form submission
+            }
+            return true;  // Allow form submission
+        }
+
         function sendEmail(event) {
+if (!validateMileage()) {
+                return;
+            }
             event.preventDefault();  // Prevent form submission
             emailjs.sendForm('service_jbulmm8', 'template_awcvemj', '#bookingForm')
                 .then(function(response) {
