@@ -93,6 +93,22 @@
                 return;
             }
             event.preventDefault();  // Prevent form submission
+
+            // Concatenate passenger list inputs
+            const passengerList = [];
+            for (let i = 1; i <= 3; i++) {
+                const passenger = document.querySelector(`[name="passenger_${i}"]`).value;
+                if (passenger) {
+                    passengerList.push(passenger);
+                }
+            }
+            const passengerListString = passengerList.join(", ");
+            const passengerListField = document.createElement("input");
+            passengerListField.setAttribute("type", "hidden");
+            passengerListField.setAttribute("name", "passenger_list");
+            passengerListField.setAttribute("value", passengerListString);
+            document.getElementById("bookingForm").appendChild(passengerListField);
+            
             emailjs.sendForm('service_jbulmm8', 'template_awcvemj', '#bookingForm')
                 .then(function(response) {
                     alert('Booking email sent successfully!');
