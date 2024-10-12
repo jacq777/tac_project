@@ -2,6 +2,12 @@
 <html>
 <head>
     <title>Minibus Booking</title>
+<style>
+        .required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
@@ -11,12 +17,12 @@
 </head>
 <body>
     <h1>Minibus Booking System</h1>
-    <form id="bookingForm" onsubmit="return validateMileage()">
-        <label for="name">Name:</label>
+    <form id="bookingForm" onsubmit="return validateForm(event)">
+        <label for="name" class="required">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
-        <label for="date">Date:</label>
+        <label for="date" class="required">Date:</label>
         <input type="date" id="date" name="date" required><br><br>
-        <label for="category">Category:</label>
+        <label for="category" class="required">Category:</label>
         <select id="category" name="category" required>
             <option value="Training trip">Training trip</option>
             <option value="Vets">Vets</option>
@@ -27,7 +33,7 @@
             <option value="XC">XC</option>
             <option value="Other">Other</option>
         </select><br><br>
-        <label for="passenger_list">Passenger List:</label><br>
+        <label for="passenger_list" class="required">Passenger List:</label><br>
         <input type="text" name="passenger_1" placeholder="Passenger 1" required><br>
         <input type="text" name="passenger_2" placeholder="Passenger 2"><br>
         <input type="text" name="passenger_3" placeholder="Passenger 3"><br>
@@ -47,11 +53,11 @@
         <input type="text" name="passenger_17" placeholder="Passenger 17"><br>
         <!-- Add more input fields as needed -->
         <br>
-        <label for="mileage_start">Mileage at Start:</label>
+        <label for="mileage_start" class="required">Mileage at Start:</label>
         <input type="number" id="mileage_start" name="mileage_start" required><br><br>
-        <label for="mileage_finish">Mileage at Finish:</label>
+        <label for="mileage_finish" class="required">Mileage at Finish:</label>
         <input type="number" id="mileage_finish" name="mileage_finish" required><br><br>
-        <label for="fuel_added">Fuel Added in Litres:</label>
+        <label for="fuel_added" class="required">Fuel Added in Litres:</label>
         <input type="number" id="fuel_added" name="fuel_added" required><br><br>
         <label for="incidents">Incidents:</label>
         <textarea id="incidents" name="incidents" rows="4" cols="50"></textarea><br><br>
