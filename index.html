@@ -30,9 +30,26 @@
         <input type="number" id="fuel_added" name="fuel_added"><br><br>
         <label for="incidents">Incidents:</label>
         <textarea id="incidents" name="incidents" rows="4" cols="50"></textarea><br><br>
-        <label for="damage_issues">Damage Issues:</label>
+        <label for="damage_issues">Damage / Issues:</label>
         <textarea id="damage_issues" name="damage_issues" rows="4" cols="50"></textarea><br><br>
         <input type="submit" value="Book">
+    </form>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minibus Booking</title>
+</head>
+<body>
+    <h1>Minibus Booking System</h1>
+    <script>
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "login.html";
+        }
+    </script>
+    <form action="submit_booking.html" method="post">
+        <!-- Your form fields here -->
     </form>
 </body>
 </html>
